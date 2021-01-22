@@ -49,5 +49,13 @@ module.exports = {
         url: `https://gatsby.stefcodes.com/graphql`, 
       },
     },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+          fonts: [
+              `Quicksand:300,400,500,600,700`       
+          ], display: 'swap'       
+      }
+  },
   ],
 }
