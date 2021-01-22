@@ -1,3 +1,5 @@
+// Reverted to ef4bba22bf39c11e74e05590855afe3dd398db58
+
 const postTemplate = require.resolve("../src/templates/post/index.js")
 
 const GET_PAGES = `
@@ -26,7 +28,6 @@ const GET_PAGES = `
         }
     }
 `
-
 
 const allPosts = []
 let postNumber = 0
