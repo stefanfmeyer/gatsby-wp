@@ -14,7 +14,7 @@
     "gatsby-plugin-react-helmet": "^3.1.14",
     "gatsby-plugin-sharp": "^2.2.37",
     "gatsby-source-filesystem": "^2.1.36",
-    "gatsby-source-graphql": "^2.13.0",
+    "gatsby-source-graphql": "2.1.25",
     "gatsby-transformer-sharp": "^2.3.3",
     "glob": "^7.1.6",
     "lodash.isempty": "^4.4.0",
