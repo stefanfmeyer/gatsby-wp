@@ -11,11 +11,11 @@ const Page = ({ pageContext }) => {
 
   return (
     <Layout>
+     
       <SEO title={title} />
 
-      <h1> {title} </h1>
-      <div dangerouslySetInnerHTML={{__html: content}} />
-
+    <h1> {title} </h1>
+<div dangerouslySetInnerHTML={{__html: content}} />
     </Layout>
   )
 }
