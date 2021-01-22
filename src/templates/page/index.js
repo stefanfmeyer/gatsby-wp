@@ -13,9 +13,8 @@ const Page = ({ pageContext }) => {
     <Layout>
      
       <SEO title={title} />
-
     <h1> {title} </h1>
-<div dangerouslySetInnerHTML={{__html: content}} />
+    <div dangerouslySetInnerHTML={{__html: content}} />
     </Layout>
   )
 }

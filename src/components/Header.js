@@ -13,7 +13,8 @@ const Header = ({ siteTitle }) => (
       marginBottom: `1.45rem`,
       padding: `20px`,
     }}
-  ><Container>
+  >
+    <Container>
     <Row>
     <Col xs={12} sm={6} md={6} lg={6} md={6}>
       <h1 style={{ margin: 0 }}>
