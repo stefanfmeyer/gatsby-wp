@@ -1,5 +1,3 @@
-// src/components/layout.js
-
 /**
  * Layout component that queries for data
  * with Gatsby's useStaticQuery component
@@ -13,7 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./Header"
 import "./layout.css"
-// import Menu from "./Menu"
+import Menu from "./Menu"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -37,12 +35,14 @@ const Layout = ({ children }) => {
           paddingTop: 0,
         }}
       >
-        {/* <Menu /> */}
+        <Menu />
         <main>{children}</main>
         <footer>
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
+          {` by `}
+          <a href="https://www.henrikwirth.com">Henrik Wirth</a>
         </footer>
       </div>
     </>

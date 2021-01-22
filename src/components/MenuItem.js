@@ -1,5 +1,3 @@
-// src/components/MenuItem.js
-
 import React from "react"
 import { CreateLocalLink } from "../utils"
 import UniversalLink from "./UniversalLink"

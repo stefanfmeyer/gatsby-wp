@@ -25,5 +25,3 @@ export const CreateLocalLink = (menuItem, wordPressUrl, blogURI='blog/') => {
 
   return newUri;
 };
-
-/* The GraphQL endpoint is serving us with absolute URLs to the WordPress instance. Therefore, we have to do some magic to workaround this and get relative URLs. */
