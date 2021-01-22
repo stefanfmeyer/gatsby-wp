@@ -1,18 +1,6 @@
-const {
-  PostTemplateFragment,
-  BlogPreviewFragment,
-} = require("../src/templates/post/data.js")
-
-const { blogURI } = require("../globals")
-
 const postTemplate = require.resolve("../src/templates/post/index.js")
-const blogTemplate = require.resolve("../src/templates/post/blog.js")
 
-const GET_POSTS = `
-    # Here we make use of the imported fragments which are referenced above
-    ${PostTemplateFragment}
-    ${BlogPreviewFragment}
-
+const GET_PAGES = `
     query GET_POSTS($first:Int $after:String) {
         wpgraphql {
             posts(
@@ -27,25 +15,22 @@ const GET_POSTS = `
                     hasNextPage
                     endCursor
                 }
-                nodes {           
-                    uri     
-                    
-                    # This is the fragment used for the Post Template
-                    ...PostTemplateFragment
-                    
-                    #This is the fragment used for the blog preview on archive pages
-                    ...BlogPreviewFragment
+                nodes {                
+                    id
+                    title
+                    postId
+                    content
+                    uri
                 }
             }
         }
     }
 `
 
-const allPosts = []
-const blogPages = [];
-let pageNumber = 0;
-const itemsPerPage = 10;
 
+const allPosts = []
+let postNumber = 0
+const itemsPerPost = 10
 
 /**
  * This is the export which Gatbsy will use to process.
@@ -60,7 +45,6 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
    * to use to create posts in our static site.
    */
   const { createPage } = actions
-
   /**
    * Fetch posts method. This accepts variables to alter
    * the query. The variable `first` controls how many items to
@@ -72,9 +56,9 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
    */
   const fetchPosts = async (variables) =>
     /**
-     * Fetch posts using the GET_POSTS query and the variables passed in.
+     * Fetch posts using the GET_PAGES query and the variables passed in.
      */
-    await graphql(GET_POSTS, variables).then(({ data }) => {
+    await graphql(GET_PAGES, variables).then(({ data }) => {
       /**
        * Extract the data from the GraphQL query results
        */
@@ -86,37 +70,6 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
           },
         },
       } = data
-
-      /**
-       * Define the path for the paginated blog page.
-       * This is the url the page will live at
-       * @type {string}
-       */
-      const blogPagePath = !variables.after
-        ? `${blogURI}/`
-        : `${blogURI}/page/${pageNumber + 1}`
-
-      /**
-       * Add config for the blogPage to the blogPage array
-       * for creating later
-       *
-       * @type {{
-       *   path: string,
-       *   component: string,
-       *   context: {nodes: *, pageNumber: number, hasNextPage: *}
-       * }}
-       */
-      blogPages[pageNumber] = {
-        path: blogPagePath,
-        component: blogTemplate,
-        context: {
-          nodes,
-          pageNumber: pageNumber + 1,
-          hasNextPage,
-          itemsPerPage,
-          allPosts,
-        },
-      }
 
       /**
        * Map over the posts for later creation
@@ -131,9 +84,9 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
        * so we can have all the data we need.
        */
       if (hasNextPage) {
-        pageNumber++
-        reporter.info(`fetch post ${pageNumber} of posts...`)
-        return fetchPosts({ first: itemsPerPage, after: endCursor })
+        postNumber++
+        reporter.info(`fetch post ${postNumber} of posts...`)
+        return fetchPosts({ first: itemsPerPost, after: endCursor })
       }
 
       /**
@@ -148,13 +101,13 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
    * Kick off our `fetchPosts` method which will get us all
    * the posts we need to create individual posts.
    */
-  await fetchPosts({ first: itemsPerPage, after: null }).then((wpPosts) => {
+  await fetchPosts({ first: itemsPerPost, after: null }).then((wpPosts) => {
 
     wpPosts && wpPosts.map((post) => {
       /**
        * Build post path based of theme blogURI setting.
        */
-      const path = `${blogURI}${post.uri}`
+      const path = `blog${post.uri}`
 
       createPage({
         path: path,
@@ -164,23 +117,9 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
         },
       })
 
-      reporter.info(`post created:  ${path}`)
+      reporter.info(`post created:  ${post.uri}`)
     })
 
     reporter.info(`# -----> POSTS TOTAL: ${wpPosts.length}`)
-
-    /**
-     * Map over the `blogPages` array to create the
-     * paginated blog pages
-     */
-    blogPages
-    && blogPages.map((blogPage) => {
-      if (blogPage.context.pageNumber === 1) {
-        blogPage.context.publisher = true;
-        blogPage.context.label = blogPage.path.replace('/', '');
-      }
-      createPage(blogPage);
-      reporter.info(`created blog archive page ${blogPage.context.pageNumber}`);
-    });
   })
 }
