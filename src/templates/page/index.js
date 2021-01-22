@@ -1,21 +1,20 @@
-// src/templates/page/index.js
-
-import React  from "react"
+import React from "react"
 
 import Layout from "../../components/Layout"
 import SEO from "../../components/SEO"
 
 
 const Page = ({ pageContext }) => {
-
-  const page = pageContext.page
+  const {
+    page: { title, content },
+  } = pageContext;
 
   return (
     <Layout>
-      <SEO title={page.title} />
+      <SEO title={title} />
 
-      <h1>{page.title}</h1>
-      <div dangerouslySetInnerHTML={{__html: page.content}} />
+      <h1> {title} </h1>
+      <div dangerouslySetInnerHTML={{__html: content}} />
 
     </Layout>
   )

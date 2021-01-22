@@ -1,5 +1,3 @@
-// src/components/Image.js
-
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 

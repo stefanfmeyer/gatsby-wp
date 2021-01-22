@@ -1,10 +1,7 @@
-
 const {
   PostTemplateFragment,
   BlogPreviewFragment,
 } = require("../src/templates/post/data.js")
-
-const {FluidImageFragment} = require("../src/templates/fragments")
 
 const { blogURI } = require("../globals")
 
@@ -13,9 +10,9 @@ const blogTemplate = require.resolve("../src/templates/post/blog.js")
 
 const GET_POSTS = `
     # Here we make use of the imported fragments which are referenced above
-    ${FluidImageFragment}
     ${PostTemplateFragment}
     ${BlogPreviewFragment}
+
     query GET_POSTS($first:Int $after:String) {
         wpgraphql {
             posts(
@@ -30,10 +27,12 @@ const GET_POSTS = `
                     hasNextPage
                     endCursor
                 }
-                nodes {
-                    uri
+                nodes {           
+                    uri     
+                    
                     # This is the fragment used for the Post Template
                     ...PostTemplateFragment
+                    
                     #This is the fragment used for the blog preview on archive pages
                     ...BlogPreviewFragment
                 }
@@ -166,7 +165,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
         },
       })
 
-      reporter.info(`post created:  ${post.uri}`)
+      reporter.info(`post created:  ${path}`)
     })
 
     reporter.info(`# -----> POSTS TOTAL: ${wpPosts.length}`)
