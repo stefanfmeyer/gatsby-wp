@@ -14,7 +14,7 @@ import MenuItem from "./MenuItem"
  * 
 /* Here we are using Gatsby's StaticQuery to get all the MenuItems. Also, we are making use of fragments to be able to reuse the query fields later on. */
 
-/* const MENU_QUERY = graphql`
+const MENU_QUERY = graphql`
 
     fragment MenuItem on WPGraphQL_MenuItem {
         id
@@ -37,10 +37,10 @@ import MenuItem from "./MenuItem"
         }
     }
 `
-*/
+
 
  // NEW QUERY
- /* This will get 3 levels of menuItems. You will need to add child items to the WordPress menu to see any results. Also, you would need to adjust your component, to support the extra 2 levels in a recursive manner. */
+ /* This will get 3 levels of menuItems. You will need to add child items to the WordPress menu to see any results. Also, you would need to adjust your component, to support the extra 2 levels in a recursive manner. 
 const MENU_QUERY_WITH_CHILDREN = graphql`
 
   fragment MenuItem on WPGraphQL_MenuItem {
@@ -74,11 +74,11 @@ const MENU_QUERY_WITH_CHILDREN = graphql`
     }
   }
 `
-
+*/
 const Menu = () => {
   return (
     <StaticQuery
-      query={MENU_QUERY_WITH_CHILDREN}
+      query={MENU_QUERY}
       render={(data) => {
         if (data.wpgraphql.menuItems) {
           const menuItems = data.wpgraphql.menuItems.nodes

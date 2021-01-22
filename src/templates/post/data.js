@@ -6,7 +6,9 @@ const PostTemplateFragment = `
         content
         link
         featuredImage {
-            sourceUrl
+            node{
+                sourceUrl
+            }
             altText
             imageFile {
                 childImageSharp {
@@ -31,9 +33,11 @@ const PostTemplateFragment = `
             }
         }
         author {
-            name
-            slug
-        }
+            node {
+              name
+              slug
+            }
+          }
     }
 `
 
