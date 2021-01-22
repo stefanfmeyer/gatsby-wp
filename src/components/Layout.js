@@ -42,7 +42,7 @@ const Layout = ({ children }) => {
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
           {` by `}
-          <a href="https://www.henrikwirth.com">Henrik Wirth</a>
+          <a href="https://stefcodes.com/">Stefan Meyer</a>
         </footer>
       </div>
     </>
