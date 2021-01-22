@@ -14,7 +14,7 @@ console.log(`This WordPress Endpoint is used: '${process.env.WORDPRESS_URL}'`)
 module.exports = {
   siteMetadata: {
     title: `Gatsby-WP`,
-    description: `The great Gatsby Starter WordPress Advanced.`,
+    description: `The great Gatsby Starter WordPress.`,
     author: `Henrik Wirth`,
   },
   plugins: [
@@ -46,7 +46,7 @@ module.exports = {
       options: {
         typeName: "WPGraphQL",
         fieldName: "wpgraphql",
-        url: `https://gatsby.stefcodes.com/graphql`,
+        url: `https://gatsby.stefcodes.com/graphql`, 
       },
     },
   ],
