@@ -16,7 +16,7 @@ const Header = ({ siteTitle }) => (
   >
     <Container>
     <Row>
-    <Col xs={12} sm={6} md={6} lg={6} md={6}>
+    
       <h1 style={{ margin: 0 }}>
         <Link
           to="/"
@@ -28,7 +28,7 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
-      </Col>
+      
       <Col xs={12} sm={6} md={6} lg={6} md={6}>
       <Menu/>
       </Col>
