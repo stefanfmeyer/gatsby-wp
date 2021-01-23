@@ -45,7 +45,7 @@ module.exports = {
       options: {
         typeName: "WPGraphQL",
         fieldName: "wpgraphql",
-        url: `${process.env.WORDPRESS_URL}/graphql`,
+        url: `https://gatsby.stefcodes.com/graphql`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
