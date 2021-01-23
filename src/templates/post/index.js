@@ -9,7 +9,6 @@ const Post = ({ pageContext }) => {
   return (
     <Layout>
       <SEO title={post.title} />
-
       <h1> {post.title} </h1>
       <div dangerouslySetInnerHTML={{ __html: post.content }} />
     </Layout>
