@@ -20,6 +20,7 @@ const GET_PAGES = `
                     title
                     pageId
                     content
+                    uri
                     isFrontPage
                 }
             }
