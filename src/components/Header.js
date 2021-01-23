@@ -1,22 +1,21 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import Menu from "./Menu"
-
-import { Container, Row, Col } from 'react-bootstrap'
-
 
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      background: `#263238`,
+      background: `rebeccapurple`,
       marginBottom: `1.45rem`,
-      padding: `20px`,
     }}
   >
-    <Container>
-    <Row>
-    
+    <div
+      style={{
+        margin: `0 auto`,
+        maxWidth: 960,
+        padding: `1.45rem 1.0875rem`,
+      }}
+    >
       <h1 style={{ margin: 0 }}>
         <Link
           to="/"
@@ -28,12 +27,7 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
-      
-      <Col xs={12} sm={6} md={6} lg={6} md={6}>
-      <Menu/>
-      </Col>
-      </Row>
-      </Container>
+    </div>
   </header>
 )
 

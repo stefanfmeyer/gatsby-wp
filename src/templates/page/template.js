@@ -40,4 +40,3 @@ const Page = ({ pageContext }) => {
 export default Page
   `
 }
-// Reverted to ef4bba22bf39c11e74e05590855afe3dd398db58

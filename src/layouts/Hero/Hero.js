@@ -1,7 +1,6 @@
 import React from "react"
 import FluidImage from "../../components/FluidImage"
 
-
 const Hero = ({ image, text, textColor }) => {
 
   return (

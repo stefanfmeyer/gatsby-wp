@@ -4,8 +4,4 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-// import bootstrap from 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-// Import custom styles for bootstrap
-// @import "~bootstrap/scss/bootstrap";
+// You can delete this file if you're not using it

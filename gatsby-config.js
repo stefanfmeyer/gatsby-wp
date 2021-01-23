@@ -1,4 +1,3 @@
-/* Grabs the correct .env file*/
 let activeEnv =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development"
 
@@ -9,12 +8,11 @@ require("dotenv").config({
 })
 
 console.log(`This WordPress Endpoint is used: '${process.env.WORDPRESS_URL}'`)
-/* */
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby-WP`,
-    description: `The great Gatsby Starter WordPress.`,
+    title: `Gatsby Starter WordPress Advanced`,
+    description: `The great Gatsby Starter WordPress Advanced.`,
     author: `Henrik Wirth`,
   },
   plugins: [
@@ -46,16 +44,8 @@ module.exports = {
       options: {
         typeName: "WPGraphQL",
         fieldName: "wpgraphql",
-        url: `https://gatsby.stefcodes.com/graphql`, 
+        url: `http://gatsby-wp/graphql`,
       },
     },
-    {
-      resolve: `gatsby-plugin-google-fonts`,
-      options: {
-          fonts: [
-              `Quicksand:300,400,500,600,700`       
-          ], display: 'swap'       
-      }
-  },
   ],
 }

@@ -1,4 +1,3 @@
-// Reverted to ef4bba22bf39c11e74e05590855afe3dd398db58
 
 const PageTemplateFragment = (layouts) => `
     fragment PageTemplateFragment on WPGraphQL_Page {
@@ -29,6 +28,3 @@ const PageTemplateFragment = (layouts) => `
 `
 
 module.exports.PageTemplateFragment = PageTemplateFragment
-
-
-
