@@ -1,6 +1,14 @@
+const { getAllLayouts } = require("./utils")
+
 const pageTemplate = require.resolve("../src/templates/page/index.js")
 
-const GET_PAGES = `
+const { FluidImageFragment } = require("../src/templates/fragments")
+const { PageTemplateFragment } = require("../src/templates/page/data")
+
+const GET_PAGES = layouts => `
+    ${FluidImageFragment}
+    ${PageTemplateFragment(layouts)}
+    
     query GET_PAGES($first:Int $after:String) {
         wpgraphql {
             pages(
@@ -16,12 +24,7 @@ const GET_PAGES = `
                     endCursor
                 }
                 nodes {                
-                    id
-                    title
-                    pageId
-                    content
-                    uri
-                    isFrontPage
+                  ...PageTemplateFragment
                 }
             }
         }
@@ -39,6 +42,8 @@ const itemsPerPage = 10
  * @returns {Promise<void>}
  */
 module.exports = async ({ actions, graphql, reporter }, options) => {
+  const layouts = getAllLayouts()
+
   /**
    * This is the method from Gatsby that we're going
    * to use to create pages in our static site.
@@ -57,7 +62,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
     /**
      * Fetch pages using the GET_PAGES query and the variables passed in.
      */
-    await graphql(GET_PAGES, variables).then(({ data }) => {
+    await graphql(GET_PAGES(layouts), variables).then(({ data }) => {
       /**
        * Extract the data from the GraphQL query results
        */
@@ -103,7 +108,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
   await fetchPages({ first: itemsPerPage, after: null }).then(wpPages => {
     wpPages &&
       wpPages.map(page => {
-        let pagePath = `${page.uri}`
+        let pagePath = `/${page.uri}/`
 
         /**
          * If the page is the front page, the page path should not be the uri,
