@@ -8,9 +8,7 @@ fragment PageTemplateFragment on WPGraphQL_Page {
     slug
     isFrontPage
     featuredImage {
-        node{
           sourceUrl
-        }
     }
     pageBuilder {
         layouts {

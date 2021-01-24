@@ -19,7 +19,7 @@ const Image = ({ image, withFallback = false, ...props }) => {
     ) : null
   }
 
-  return <img src={image.node.sourceUrl} alt={image.altText} {...props} />
+  return <img src={image.sourceUrl} alt={image.altText} {...props} />
 }
 
 export default Image

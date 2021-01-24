@@ -1,12 +1,10 @@
-const { getAllLayouts } = require("./utils")
+const { getAllLayoutsData } = require("./utils")
 
 const pageTemplate = require.resolve("../src/templates/page/index.js")
 
-const { FluidImageFragment } = require("../src/templates/fragments")
 const { PageTemplateFragment } = require("../src/templates/page/data")
 
 const GET_PAGES = layouts => `
-    ${FluidImageFragment}
     ${PageTemplateFragment(layouts)}
     
     query GET_PAGES($first:Int $after:String) {
@@ -42,7 +40,7 @@ const itemsPerPage = 10
  * @returns {Promise<void>}
  */
 module.exports = async ({ actions, graphql, reporter }, options) => {
-  const layouts = getAllLayouts()
+  const layoutsData = getAllLayoutsData()
 
   /**
    * This is the method from Gatsby that we're going
@@ -62,7 +60,7 @@ module.exports = async ({ actions, graphql, reporter }, options) => {
     /**
      * Fetch pages using the GET_PAGES query and the variables passed in.
      */
-    await graphql(GET_PAGES(layouts), variables).then(({ data }) => {
+    await graphql(GET_PAGES(layoutsData), variables).then(({ data }) => {
       /**
        * Extract the data from the GraphQL query results
        */

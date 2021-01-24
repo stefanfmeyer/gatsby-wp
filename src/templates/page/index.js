@@ -2,16 +2,23 @@ import React from "react"
 
 import Layout from "../../components/Layout"
 import SEO from "../../components/SEO"
+import AllLayouts from "../../components/AllLayouts"
 
 const Page = ({ pageContext }) => {
-  const page = pageContext.page
+  const {
+    page: { title, pageBuilder },
+  } = pageContext
+
+  const layouts = pageBuilder.layouts || []
 
   return (
     <Layout>
-      <SEO title={page.title} />
+      <SEO title={title} />
+      <h1> {title} </h1>
 
-      <h1>{page.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: page.content }} />
+      {layouts.map((layout, index) => {
+        return <AllLayouts key={index} layoutData={layout} />
+      })}
     </Layout>
   )
 }
